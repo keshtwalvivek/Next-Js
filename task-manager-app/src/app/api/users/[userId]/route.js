@@ -1,10 +1,11 @@
+import { connectDB } from "@/helper/db";
 import { User } from "@/models/user";
 import { NextResponse } from "next/server";
-
+connectDB();
 export async function GET(req, { params }) {
   try {
     const { userId } = params;
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).select("-password");
 
     return NextResponse.json({ user });
   } catch (error) {
@@ -36,11 +37,25 @@ export async function DELETE(req, { params }) {
 }
 
 export async function PUT(req, { params }) {
+  const { userId } = params;
+  console.log("user id ->>>", userId);
+  console.log("user ->>>", req.body);
+
+  const { name, email, password, about, profileURL } = await req.json();
   try {
-    const { userId } = params;
+    const user = await User.findById(userId);
+
+    (user.name = name),
+      (user.email = email),
+      (user.password = password),
+      (user.about = about),
+      (user.profileURL = profileURL);
+
+    const updatedUser = await user.save();
+    return NextResponse.json(updatedUser);
   } catch (error) {
     return NextResponse.json({
-      message: "",
+      message: "failed to update user !!",
       success: false,
     });
   }
