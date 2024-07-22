@@ -1,15 +1,13 @@
 import Image from "next/image";
 
-async function timeTake() {
-  await new Promise((resvole) => {
-    setTimeout(resvole, 3000);
-  });
-}
-export default async function Home() {
-  await timeTake();
+export const metadata = {
+  title: "Home: Work Manager",
+};
+
+export default function Home() {
   return (
     <div>
-      <h1>home page</h1>
+      <h1 className="text-4xl">Welcome to work manger </h1>
     </div>
   );
 }

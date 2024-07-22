@@ -1,7 +1,9 @@
+import { connectDB } from "@/helper/db";
 import { getResponseMessage } from "@/helper/errorMessage";
 import { Task } from "@/models/task";
 import { NextResponse } from "next/server";
 
+connectDB();
 export async function GET(req) {
   try {
     const tasks = await Task.find();
