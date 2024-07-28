@@ -38,9 +38,14 @@ export async function POST(req) {
     return response;
   } catch (error) {
     console.log(error);
-    return NextResponse.json({
-      message: "failed to created user !!",
-      satus: false,
-    });
+    return NextResponse.json(
+      {
+        message: "failed to created user !!",
+        satus: false,
+      },
+      {
+        status: 500,
+      }
+    );
   }
 }

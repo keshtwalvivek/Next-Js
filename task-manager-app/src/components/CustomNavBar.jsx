@@ -19,17 +19,17 @@ function CustomNavBar() {
             <Link href={"/add-task"}>Add Task</Link>
           </li>
           <li className="hover:text-black ">
-            <Link href={""}>Show Task</Link>
+            <Link href={"/show-tasks"}>Show Task</Link>
           </li>
         </ul>
       </div>
       <div>
         <ul className="flex space-x-4">
           <li className="hover:text-black ">
-            <Link href={""}>Login</Link>
+            <Link href={"/login"}>Login</Link>
           </li>
           <li className="hover:text-black ">
-            <Link href={""}>SignIn</Link>
+            <Link href={"/signup"}>SignIn</Link>
           </li>
         </ul>
       </div>
