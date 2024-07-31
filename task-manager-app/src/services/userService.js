@@ -6,3 +6,11 @@ export async function signUp(user) {
   });
   return result;
 }
+
+export async function login(LoginData) {
+  const result = await httpAxios
+    .post("/api/login", LoginData)
+    .then((res) => res.data);
+
+  return result;
+}

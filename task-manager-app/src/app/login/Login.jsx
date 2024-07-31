@@ -1,8 +1,11 @@
 "use client";
-import { signUp } from "@/services/userService";
+import { login, signUp } from "@/services/userService";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 function Login() {
+  const router = useRouter();
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -10,19 +13,25 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    if (data.email.trim() === "" || data.email === null) {
+    if (loginData.email.trim() === "" || loginData.email === null) {
       toast.warning("Email is required !!");
       return;
     }
-    if (data.password.trim() === "" || data.password === null) {
+    if (loginData.password.trim() === "" || loginData.password === null) {
       toast.warning("Password is required !!");
       return;
     }
     try {
+      const result = await login(loginData);
+      console.log(result);
+      toast.success("Logged in");
+      router.push("/profile/user");
     } catch (error) {
       console.log(error);
+      toast.error(error.response.data.message, {
+        position: "top-center",
+      });
     }
-    const result = await signUp;
   };
 
   const resetForm = () => {
