@@ -35,6 +35,7 @@ export async function POST(req) {
 
     // create nextResponse -- cookie
     const response = NextResponse.json({
+      user,
       message: "Login success !!",
       success: true,
     });
@@ -43,8 +44,6 @@ export async function POST(req) {
       expiresIn: "1d ",
       httpOnly: true,
     });
-    console.log("user data->>>", user);
-    console.log("jwt token->>>>>>> ", token);
 
     return response;
   } catch (error) {
